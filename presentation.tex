@@ -26,6 +26,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{amsfonts}
+\usepackage{forest}
+\usepackage{pgfgantt}
 \usepackage[
     backend=biber,
     style=phys,
@@ -39,7 +41,7 @@
 %\usepackage[backend=biber]{biblatex}
 \addbibresource{presentation.bib}
 
-\title[TPS free energies]{Transition path sampling and the calculation of free energies of enzymatic reactions}
+\title[TPS free energies]{Transition path sampling of enzymatic reactions}
 %\subtitle{} 
 
 \author[Schwartz Group]{Sree Ganesh Balasubramani}
@@ -52,6 +54,19 @@
 % If you wish to uncover everything in a step-wise fashion, uncomment
 % the following command: 
 %\beamerdefaultoverlayspecification{<+->}
+\tikzset{
+    invisible/.style={opacity=0,text opacity=0},
+    visible on/.style={alt=#1{}{invisible}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+    },
+}
+\forestset{
+  visible on/.style={
+    for tree={
+      /tikz/visible on={#1},
+      edge+={/tikz/visible on={#1}}}}}
+
 \begin{document}
 %------------------------------------------------------------------------------
 \begin{frame}
@@ -59,14 +74,61 @@
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
+\frametitle{Introduction}
+\begin{itemize}
+\item From Chennai, India
+\end{itemize}
+\pause
+\begin{columns}
+\begin{column}{0.32\textwidth}
+    \begin{block}{2009-2014}
+    BS-MS in Chemistry, Indian Institute of Science Education and research, Trivandrum
+        \end{block}
+    \end{column}
+    \pause
+    \begin{column}{0.32\textwidth}
+    \begin{block}{2014-2020}
+        PhD in theoretical Chemistry, University of California, Irvine\newline
+        \end{block}
+    \end{column}
+    \pause
+\begin{column}{0.32\textwidth}
+        \begin{block}{2020-Present}
+        Postdoctoral research associate, The University of Arizona, Tucson
+        \end{block}
+    \end{column}
+\end{columns}  
+\end{frame}
+%
+%------------------------------------------------------------------------------
+\begin{frame}
   \frametitle{Outline}
-  \begin{itemize}[<+-|alert@+>]
-      \item Motivations
-      \item Introduction to transition path sampling 
-      \item Equilibrium sampling within TPS
-      \item Algorithm 
-      \item Results
-  \end{itemize}
+  \pause
+  \resizebox{\textwidth}{!}{
+  \begin{forest}
+  for tree={
+    rounded corners, draw, align=center, top color=white, bottom color=blue!20,
+    edge+=->,
+    l sep'+=10pt,
+  }, 
+   [Transition path sampling (TPS),for children={visible on=<2->}
+     [Improvements to efficiency,,for children={visible on=<3->}
+       [human MAT2A enzyme ]%want this block green if is possible.. :)
+       [\emph{plasmodium vivax} adenosine deaminase enzyme]
+     ]
+     [Algorithm to calculate free energies
+       [MBHase artificial enzyme]
+     ]
+   ] 
+\end{forest}}
+  %\setbeamercolor{itemize/enumerate body}{fg=gray}
+  %\begin{itemize}[<+-|alert@+>]
+  %    \item Motivations
+  %    \item Introduction to transition path sampling 
+  %    \item Equilibrium sampling within TPS
+  %    \item Algorithm 
+  %    \item Results
+  %\end{itemize}
 \end{frame}
 %------------------------------------------------------------------------------
 %\begin{frame}
@@ -97,13 +159,21 @@
 \pause
 \begin{figure}
 \centering
+\begin{minipage}[b]{0.45\linewidth}
 \includegraphics[scale=0.5]{figures/pot-surf.pdf}
+\caption{Potential energy manifold}
+\end{minipage}
+\begin{minipage}[b]{0.45\linewidth}
+\includegraphics[scale=0.4]{figures/mat2a-reaction.png}
+\caption{Reaction catalyzed by the human methyl adenosyl transferase enzyme}
+\end{minipage}
 \end{figure}
+\pause
 \begin{block}{Time scales in molecular dynamics simulations}
 {
     \begin{itemize}
-        \item Consider the dissociation of a weak acid in water, with a half life of say $1\;ms$ 
-        \item Straightforward MD simulations with $1\;fs$ time step (takes $1\;s$ of wall time to simulate)
+        \item Dissociation of a weak acid in water, with a half life of say $1\;ms$ 
+        \item MD simulations with $1\;fs$ time step (takes $1\;s$ of wall time)
         would take $10^{12}\;s$ of wall time to observe a single dissociation event 
     \end{itemize}
 }
@@ -111,29 +181,53 @@
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
-\frametitle{Enzymes}
-\pause
-Enzymes are evolved to carry out complex chemical transformations routinely
-\pause
-\begin{figure}
-\centering 
-\includegraphics[scale=0.6]{figures/mat2a-reaction.png}
-\end{figure}
+\frametitle{Hybrid quantum mechanics/molecular mechanics (QM/MM) method}
+Since bonds are broken and formed in these chemical reactions treating some atoms 
+quantum mechanically is necessary.
+\begin{center}
+\begin{tikzpicture}
+\node [draw,
+    circle,
+    minimum size =3cm,
+    label={135:$MM$}] (A) at (0,0){};
+ 
+% Set B
+\node [draw,
+    circle,fill=black!30!blue,
+    minimum size =1cm,
+    label={45:$QM$}] (B) at (0.8,-0.2){};
+\end{tikzpicture}
+\end{center}
+%\newline
+QM methods: semiempirical (PM3, AM1, etc.), density functional approximations ($\mathcal{O}(N^3)$) \\
+Stitch the QM and MM regions together with generalized hybrid orbital (GHO) scheme 
 \end{frame}
+%------------------------------------------------------------------------------
+%\begin{frame}
+%\frametitle{Enzymes}
+%\pause
+%Enzymes are evolved to carry out complex chemical transformations routinely
+%\pause
+%\begin{figure}
+%\centering 
+%\includegraphics[scale=0.6]{figures/mat2a-reaction.png}
+%\caption{Reaction catalyzed by the human methyl adenosyl transferase enzyme}
+%\end{figure}
+%\end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Enhanced sampling techniques}
 \pause
-Umbrella sampling, metadynamics, milestoning, conformational flooding, adaptive biasing force method and so on 
+Examples: Umbrella sampling, metadynamics, milestoning, adaptive biasing force method
 \pause
 \begin{block}
 {
     \begin{itemize}
-        \item Rendered MD simulations to be widely applicable in the fields of chemistry, condensed matter physics, biology and materials science
+        \item Rendered MD simulations to be widely applicable in chemistry, biology and materials science
         \pause
         \item Use of predefined reaction coordinates, which can be complicated for large biomolecular systems
         \pause
-        \item Use of biasing potential to access regions in phase space with high free energy barriers
+        \item Use of biasing potentials to access regions in phase space with high free energy barriers
     \end{itemize}
 }
 \end{block}
@@ -172,7 +266,7 @@ Umbrella sampling, metadynamics, milestoning, conformational flooding, adaptive 
 %------------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Trajectories in phase space}
-\begin{tikzpicture}[scale=0.5]
+\begin{tikzpicture}[scale=0.6]
 \begin{axis}[
     %y label style={rotate=45, anchor=south west},
     xlabel=time,
@@ -257,6 +351,54 @@ every axis y label/.style={
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
+\frametitle{Speeding up TPS calculations and analysis}
+\begin{block}{Bottlenecks}
+\begin{itemize}
+\item Classification of reactant and product states
+\end{itemize}
+\end{block}
+\pause
+\begin{itemize}
+\item Calculate bond parameters for transforming groups of atoms 
+\end{itemize}
+\begin{figure}
+\centering
+\begin{minipage}[b]{0.45\linewidth}
+\includegraphics[scale=0.09]{figures/mat2a-reactant.png}
+\caption{Reactant}
+\label{fig:minipage1}
+\end{minipage}
+\quad
+\begin{minipage}[b]{0.45\linewidth}
+\includegraphics[scale=0.09]{figures/mat2a-prod.png}
+\caption{Product}
+\label{fig:minipage2}
+\end{minipage}
+\end{figure}
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Solution: Artificial neural networks}
+\begin{block}{}
+\begin{itemize}
+\item Training set: MD trajectories from equilibration 
+\end{itemize}
+\end{block}
+\pause
+\begin{figure}
+\includegraphics[scale=0.35]{figures/mbh_2waters_nn_comparison.png}
+\end{figure}
+Using neural networks to classify molecular states
+Descriptors : All interatomic distances of the substrate and any residue of interest
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\begin{figure}
+\includegraphics[scale=0.3]{flow/flowchart.pdf}
+\end{figure}
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
 \frametitle{Separatrix and committor analysis\footfullcite{Dellago2006}}
 \begin{figure}[ht!]
 \centering
@@ -288,10 +430,93 @@ every axis y label/.style={
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
-\frametitle{Speeding up TPS calculations and analysis}
-Using neural networks to classify molecular states
-
+\frametitle{Human adenosyl methionine enzyme}
+\begin{figure}
+\centering 
+\includegraphics[scale=0.6]{figures/mat2a-reaction.png}
+\end{figure}
+SAM is an essential metabolite which is distributed to almost all body tissues and fluids, is a
+universal methyl donor, and is of fundamental importance to
+the metabolism of compounds such as hormones, neurotransmitters, proteins, and nucleic acids.
 \end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{System preparation}
+\begin{itemize}
+\item The energies of both the systems were minimized using 50 steps of the 
+steepest descent method, followed by 2000 steps of the
+adopted basis Newton-Raphson method where only classical molecular mechanics 
+was used for the dynamics. 
+
+\item The minimized systems were
+heated slowly to 300 K for 35 ps beginning with harmonic
+constraints on all atoms except on the H atoms and the TIP3P 
+water molecules with gradual reduction of the restraint forces. 
+
+\item 15 ps of equilibration was carried out starting with harmonic 
+restraint forces followed by 20 ps of constraint free 
+equilibration to prepare the systems for TPS simulations. 
+
+\end{itemize}
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{System preparation}
+\begin{figure}
+\centering 
+\includegraphics[scale=0.2]{figures/mat2a-equil.png}
+\end{figure}
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Committor analysis and transition state}
+\begin{figure}
+\centering
+\includegraphics[scale=0.1]{figures/mat2a-trans-labelled.png}
+\end{figure}
+\begin{center}
+\begin{tabular}{l c c}
+\hline\hline
+ & d$_{\text{SC}}$ ({\AA}) & d$_{\text{OC}}$ ({\AA})\\
+\hline
+%1 & 2.30 & 2.10 \\
+%2 & 2.31 & 2.08 \\
+%3 & 2.31 & 2.09 \\
+%4 & 2.34 & 2.14 \\
+%5 & 2.35 & 2.17 \\
+%6 & 2.41 & 2.16 \\
+%7 & 2.41 & 2.11 \\
+%8 & 2.40 & 2.15 \\
+%9 & 2.35 & 2.13 \\
+%10& 2.38 & 2.12 \\
+%11& 2.29 & 2.06 \\
+Mean & 2.35 & 2.12 \\
+Stddev & 0.04 & 0.03 \\
+\hline\hline
+\end{tabular}
+\end{center}
+Experimental results: $d_{\text{SC}}:\;2.03$ {\AA} and $d_{\text{OC}}:\;2.32$ {\AA}
+\end{frame}
+%------------------------------------------------------------------------------
+%\begin{frame}
+%\frametitle{Committor distribution analysis}
+%\begin{figure}[ht!]
+%\centering
+%\begin{minipage}[b]{0.45\linewidth}
+%\includegraphics[width=\textwidth]{figures/comm-60-mat2a-nocons.pdf}
+%\label{fig:minipage1}
+%\end{minipage}
+%\quad
+%\begin{minipage}[b]{0.45\linewidth}
+%\includegraphics[width=\textwidth]{figures/comm-60-mat2a.pdf}
+%\label{fig:minipage2}
+%\end{minipage}
+%\caption{Committor distribution analysis for obtaining the reaction coordinate of the 
+%MAT2A catalyzed reaction. The figure on the left has the QM region constrained and the figure 
+%on the right has the QM region along with the Gln113, Ser114, Arg249 and Arg264 residues constrained.}
+%\label{fig:mat2a-comm-dist}
+%\end{figure}
+%\end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
 \frametitle{TPS ensemble}
@@ -388,131 +613,26 @@ The probability of $P(\lambda_i)$ is defined by
 P(\lambda_i) = \int \textbf{dV} \rho({\vec{q}})\delta(\lambda_i-\tilde{\lambda}(\vec{q})) \nonumber 
 \end{equation}
 In practice, the calculation of $P(\lambda_i)$ proceeds through histogram based techniques. 
-
-\href{<url>}{<site description>}
+\pause
+\begin{block}{}
+The algorithm is implemented using python and is available for use through a
+\href{https://github.com/sreeganb/free-energy-tps}{Github repository}
+\end{block}
 \end{frame}
 %------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{QM/MM simulations}
-CHARMM force field consists of intramolecular terms such as 
-\begin{align}
-E_{int} = &\sum_{bonds}k_r(r-r_{0})^2 + \sum_{angles}k_{\theta}(\theta - \theta_{0})^2 \nonumber \\ &+ \sum_{dihedrals}k_{\phi}(1+\cos(n\phi-\delta)) \nonumber \\
-&+ \sum_{imp.\;dihed.} k_{\psi}(\psi - \psi_0)^2 + \sum_{Urey-Bradley} k_{\text{UB}}(r_{1,3}-r_{1,3;0}) \nonumber 
-\end{align}\pause
-and intermolecular terms such as 
-\begin{align}
-\sum_{nonbonded} \left(\frac{q_iq_j}{4\pi\epsilon r_{ij}} - E_{min} 
-\left[\left(\frac{R_{min}}{r_{ij}}\right)^{12} - \left(\frac{R_{min}}{r_{ij}}\right)^{6} \right] \right)\nonumber 
-\end{align}
-\end{frame}
-%------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{}
-\begin{tikzpicture}
-\node [draw,
-    circle,
-    minimum size =3cm,
-    label={135:$MM$}] (A) at (0,0){};
- 
-% Set B
-\node [draw,
-    circle,
-    minimum size =1cm,
-    label={45:$QM$}] (B) at (0.8,-0.2){};
-\end{tikzpicture}
-\newline
-QM methods: semiempirical (PM3, AM1, etc.), density functional approximations ($\mathcal{O}(N^3)$) \\
-Stitch the QM and MM regions together with generalized hybrid orbital (GHO) scheme 
-\end{frame}
-%------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Human adenosyl methionine enzyme}
-\begin{figure}
-\centering 
-\includegraphics[scale=0.6]{figures/mat2a-reaction.png}
-\end{figure}
-SAM is an essential metabolite which is distributed to almost all body tissues and fluids, is a
-universal methyl donor, and is of fundamental importance to
-the metabolism of compounds such as hormones, neurotransmitters, proteins, and nucleic acids.
-\end{frame}
-%------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{System preparation}
-\begin{itemize}
-\item The energies of both the systems were minimized using 50 steps of the 
-steepest descent method, followed by 2000 steps of the
-adopted basis Newton-Raphson method where only classical molecular mechanics 
-was used for the dynamics. 
-
-\item The minimized systems were
-heated slowly to 300 K for 35 ps beginning with harmonic
-constraints on all atoms except on the H atoms and the TIP3P 
-water molecules with gradual reduction of the restraint forces. 
-
-\item 15 ps of equilibration was carried out starting with harmonic 
-restraint forces followed by 20 ps of constraint free 
-equilibration to prepare the systems for TPS simulations. 
-
-\end{itemize}
-\end{frame}
-%------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{System preparation}
-\begin{figure}
-\centering 
-\includegraphics[scale=0.2]{figures/mat2a-equil.png}
-\end{figure}
-\end{frame}
-%------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Committor analysis and transition state}
-\begin{figure}
-\centering
-\includegraphics[scale=0.1]{figures/mat2a-trans-labelled.png}
-\end{figure}
-\begin{center}
-\begin{tabular}{l c c}
-\hline\hline
- & d$_{\text{SC}}$ ({\AA}) & d$_{\text{OC}}$ ({\AA})\\
-\hline
-%1 & 2.30 & 2.10 \\
-%2 & 2.31 & 2.08 \\
-%3 & 2.31 & 2.09 \\
-%4 & 2.34 & 2.14 \\
-%5 & 2.35 & 2.17 \\
-%6 & 2.41 & 2.16 \\
-%7 & 2.41 & 2.11 \\
-%8 & 2.40 & 2.15 \\
-%9 & 2.35 & 2.13 \\
-%10& 2.38 & 2.12 \\
-%11& 2.29 & 2.06 \\
-Mean & 2.35 & 2.12 \\
-Stddev & 0.04 & 0.03 \\
-\hline\hline
-\end{tabular}
-\end{center}
-Experimental results: $d_{\text{SC}}:\;2.03$ {\AA} and $d_{\text{OC}}:\;2.32$ {\AA}
-\end{frame}
-%------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Committor distribution analysis}
-\begin{figure}[ht!]
-\centering
-\begin{minipage}[b]{0.45\linewidth}
-\includegraphics[width=\textwidth]{figures/comm-60-mat2a-nocons.pdf}
-\label{fig:minipage1}
-\end{minipage}
-\quad
-\begin{minipage}[b]{0.45\linewidth}
-\includegraphics[width=\textwidth]{figures/comm-60-mat2a.pdf}
-\label{fig:minipage2}
-\end{minipage}
-\caption{Committor distribution analysis for obtaining the reaction coordinate of the 
-MAT2A catalyzed reaction. The figure on the left has the QM region constrained and the figure 
-on the right has the QM region along with the Gln113, Ser114, Arg249 and Arg264 residues constrained.}
-\label{fig:mat2a-comm-dist}
-\end{figure}
-\end{frame}
+%\begin{frame}
+%\frametitle{QM/MM simulations}
+%CHARMM force field consists of intramolecular terms such as 
+%\begin{align}
+%E_{int} = &\sum_{bonds}k_r(r-r_{0})^2 + \sum_{angles}k_{\theta}(\theta - \theta_{0})^2 \nonumber \\ &+ \sum_{dihedrals}k_{\phi}(1+\cos(n\phi-\delta)) \nonumber \\
+%&+ \sum_{imp.\;dihed.} k_{\psi}(\psi - \psi_0)^2 + \sum_{Urey-Bradley} k_{\text{UB}}(r_{1,3}-r_{1,3;0}) \nonumber 
+%\end{align}\pause
+%and intermolecular terms such as 
+%\begin{align}
+%\sum_{nonbonded} \left(\frac{q_iq_j}{4\pi\epsilon r_{ij}} - E_{min} 
+%\left[\left(\frac{R_{min}}{r_{ij}}\right)^{12} - \left(\frac{R_{min}}{r_{ij}}\right)^{6} \right] \right)\nonumber 
+%\end{align}
+%\end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Free energies}
@@ -579,13 +699,13 @@ adenosine deaminase.
 %------------------------------------------------------------------------------
 \begin{frame}
 \frametitle{}
-\begin{block}{\centering Project 3}
-\centering Computational design of artificial enzymes
-\end{block}
+\begin{block}{\centering Computational design of artificial enzymes}
 \pause
 \begin{itemize}[<+-|alert@+>]
-        \item  Provides new insights into the emergence of sophisticated catalytic sites in proteins
-    \end{itemize}
+        \item Provides new insights into the emergence of sophisticated catalytic sites in proteins
+        \item Use noncanonical amino acids and improve catalytic efficiency
+    \end{itemize} 
+\end{block}
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
@@ -595,11 +715,11 @@ Design enzymes that catalyze the Morita-Bayliss-Hillman reaction
 \centering
 \includegraphics[scale=0.4]{figures/mbh-reaction.png}
 \end{figure}
+MBH reaction is an important organic synthesis tool for the formation of C-C bonds
 \begin{itemize}[<+-|alert@+>]
 \item{Transfer of two protons}
 \item{Does evolution select for quantum mechanical tunneling?}
 \end{itemize}
-
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
@@ -610,6 +730,25 @@ This is the most evolved version of the previous generation \footfullcite{Crawsh
 \includegraphics[scale=0.1]{figures/trans-120.png}
 \end{figure}
 \end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Free enegy profile}
+\begin{figure}
+\centering
+\begin{minipage}[b]{0.45\linewidth}
+\includegraphics[scale=0.6]{figures/glu-fenergy.pdf}
+\caption{Reactant}
+\label{fig:minipagef1}
+\end{minipage}
+\quad
+\begin{minipage}[b]{0.45\linewidth}
+\includegraphics[scale=0.6]{figures/prot-alkox-fenergy.pdf}
+\caption{Product}
+\label{fig:minipagef2}
+\end{minipage}
+\end{figure}
+\end{frame}
+
 %------------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Conclusions}
@@ -626,6 +765,14 @@ This is the most evolved version of the previous generation \footfullcite{Crawsh
     \end{itemize}
 }
 \end{block}
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{PhD work}
+\begin{itemize}
+\item Density functional theory development 
+\item 
+\end{itemize}  
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
