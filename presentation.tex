@@ -27,6 +27,8 @@
 \usepackage{graphicx}
 \usepackage{amsfonts}
 \usepackage{forest}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{pgfgantt}
 \usepackage[
     backend=biber,
@@ -66,7 +68,7 @@
     for tree={
       /tikz/visible on={#1},
       edge+={/tikz/visible on={#1}}}}}
-
+\setbeamertemplate{navigation symbols}{}
 \begin{document}
 %------------------------------------------------------------------------------
 \begin{frame}
@@ -74,85 +76,61 @@
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
-\frametitle{Introduction}
-\begin{itemize}
-\item From Chennai, India
-\end{itemize}
-\pause
-\begin{columns}
-\begin{column}{0.32\textwidth}
-    \begin{block}{2009-2014}
-    BS-MS in Chemistry, Indian Institute of Science Education and research, Trivandrum
-        \end{block}
-    \end{column}
-    \pause
-    \begin{column}{0.32\textwidth}
-    \begin{block}{2014-2020}
-        PhD in theoretical Chemistry, University of California, Irvine\newline
-        \end{block}
-    \end{column}
-    \pause
-\begin{column}{0.32\textwidth}
-        \begin{block}{2020-Present}
-        Postdoctoral research associate, The University of Arizona, Tucson
-        \end{block}
-    \end{column}
-\end{columns}  
+\frametitle{About Me}
+\begin{figure}
+\includegraphics[scale=0.6]{figures/sree_aboutme.png}
+\end{figure}
+%\begin{itemize}
+%\item From Chennai, India
+%\end{itemize}
+%\pause
+%\begin{columns}
+%\begin{column}{0.32\textwidth}
+%    \begin{block}{2009-2014}
+%    BS-MS in Chemistry, Indian Institute of Science Education and research, Trivandrum
+%        \end{block}
+%    \end{column}
+
+%    \pause
+%    \begin{column}{0.32\textwidth}
+%    \begin{block}{2014-2020}
+%        PhD in theoretical Chemistry, University of California, Irvine\newline
+%        \end{block}
+%    \end{column}
+%    \pause
+%\begin{column}{0.32\textwidth}
+%        \begin{block}{2020-Present}
+%        Postdoctoral research associate, The University of Arizona, Tucson
+%        \end{block}
+%    \end{column}
+%\end{columns}  
 \end{frame}
 %
 %------------------------------------------------------------------------------
 \begin{frame}
   \frametitle{Outline}
-  \pause
-  \resizebox{\textwidth}{!}{
-  \begin{forest}
-  for tree={
-    rounded corners, draw, align=center, top color=white, bottom color=blue!20,
-    edge+=->,
-    l sep'+=10pt,
-  }, 
-   [Transition path sampling (TPS),for children={visible on=<2->}
-     [Improvements to efficiency,,for children={visible on=<3->}
-       [human MAT2A enzyme ]%want this block green if is possible.. :)
-       [\emph{plasmodium vivax} adenosine deaminase enzyme]
-     ]
-     [Algorithm to calculate free energies
-       [MBHase artificial enzyme]
-     ]
-   ] 
-\end{forest}}
-  %\setbeamercolor{itemize/enumerate body}{fg=gray}
-  %\begin{itemize}[<+-|alert@+>]
-  %    \item Motivations
-  %    \item Introduction to transition path sampling 
-  %    \item Equilibrium sampling within TPS
-  %    \item Algorithm 
-  %    \item Results
-  %\end{itemize}
+  %\resizebox{\textwidth}{!}{
+  %\begin{forest}
+  %for tree={
+  %  rounded corners, draw, align=center, top color=white, bottom color=blue!20,
+  %  edge+=->,
+  %  l sep'+=10pt,
+  %}, 
+  % [Transition path sampling (TPS),for children={visible on=<2->}
+  %   [Improvements to efficiency,,for children={visible on=<3->}
+  %     [human MAT2A enzyme ]%want this block green if is possible.. :)
+  %     [\emph{plasmodium vivax} adenosine deaminase enzyme]
+  %   ]
+  %   [Algorithm to calculate free energies
+  %     [MBHase artificial enzyme]
+  %   ]
+  % ] 
+%\end{forest}}
+  \begin{figure}
+\centering
+\includegraphics[scale=0.6]{figures/sree_outline.png}
+  \end{figure}
 \end{frame}
-%------------------------------------------------------------------------------
-%\begin{frame}
-%\frametitle{Motivations}
-%\begin{block}{Why study enzyme activity?}
-%{
-%    \begin{itemize}
-%        \item Efficient catalysts
-%        \item Design transition state analogues and inhibitors
-%        \item Directed evolution to obtain more efficient enzymes
-%    \end{itemize}
-%}
-%\end{block}
-%\pause
-%\begin{block}{Why use molecular dynamics simulations?}
-%{
-%\begin{itemize}
-%    \item Enzyme activity in atomistic detail
-%    \item  Hard to probe transition state structures using physical or spectroscopic 
-%     methods since they typically have extremely short lifetimes ($10^{-13}\;s$)
-% \end{itemize}
-%}
-%\end{block}
-%\end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Motivations: Sampling rare but important events}
@@ -165,7 +143,7 @@
 \end{minipage}
 \begin{minipage}[b]{0.45\linewidth}
 \includegraphics[scale=0.4]{figures/mat2a-reaction.png}
-\caption{Reaction catalyzed by the human methyl adenosyl transferase enzyme}
+\caption{Reaction catalyzed by the human methionine adenosyltransferase enzyme}
 \end{minipage}
 \end{figure}
 \pause
@@ -265,6 +243,50 @@ Examples: Umbrella sampling, metadynamics, milestoning, adaptive biasing force m
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
+ \begin{figure}
+\centering
+\includegraphics[scale=0.6]{figures/sree_outline_1.png}
+  \end{figure}
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Human methionine S-adenosyltransferase}
+\begin{figure}
+\centering 
+\includegraphics[scale=0.6]{figures/mat2a-reaction.png}
+\end{figure}
+\begin{itemize}
+\item In collaboration with Prof. Vern Schramm's research group at the Albert Einstein college 
+%\item SAM is an essential metabolite, a universal methyl donor
+\end{itemize}
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{System preparation}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item The crystal structure of the enzyme is obtained
+
+\item Energy minimization using adopted basis Newton-Raphson method. 
+
+\item Heat the system slowly to 300 K 
+
+\item Finally, equilibrate for 100 ps 
+to prepare the systems for TPS simulations. 
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}  %%<--- here
+\begin{figure}
+\centering 
+\includegraphics[scale=0.15]{figures/mat2a-equil.png}
+\caption{Equilibrated structure of the human MAT2A enzyme with the substrate bound to it}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
 \frametitle{Trajectories in phase space}
 \begin{tikzpicture}[scale=0.6]
 \begin{axis}[
@@ -301,10 +323,19 @@ Examples: Umbrella sampling, metadynamics, milestoning, adaptive biasing force m
 \begin{frame}
 \frametitle{Monte Carlo in path space: the shooting algorithm}
 %\begin{block}
-\begin{itemize}
-    \item Start with an initial biased reactive trajectory
-\end{itemize}
-%\end{block}
+\begin{columns}
+\begin{column}{0.40\textwidth}
+%\begin{itemize}
+%    \item Start with an initial biased reactive trajectory
+%\end{itemize}
+%\pause
+\begin{block}{}
+{
+\textcolor{black}{biased}, \textcolor{green}{accepted}, \textcolor{red}{rejected}
+}
+\end{block}
+\begin{center}
+\resizebox{0.9\textwidth}{0.9\textwidth}{
 \begin{tikzpicture}
  \begin{axis}[
         xmin=0.0,xmax=5.0,
@@ -347,8 +378,17 @@ every axis y label/.style={
 \draw [white,thick] (3.3 ,2.25) to [ curve through ={(3.6,2.9)  . . (3.88, 3.30) . . (4.5,3.5) . . (6.0,4.35)  }] (6.8,4.4);% curve
 \pause  
 \draw [white,thick] (3.3 ,2.25) to [ curve through ={(3.2,1.9)  . . (2.3,1.6) . . (4.76,4.66)  }] (6.8,5.1);% curve 
-\end{tikzpicture}
+\end{tikzpicture}}
+\end{center}
+\end{column}
+%
+\begin{column}{0.48\textwidth}
+\includegraphics[scale=0.27]{flow/old-flow.pdf}
+\end{column}
+%
+\end{columns}
 \end{frame}
+
 %------------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Speeding up TPS calculations and analysis}
@@ -393,9 +433,22 @@ Descriptors : All interatomic distances of the substrate and any residue of inte
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
+\begin{center}
 \begin{figure}
-\includegraphics[scale=0.3]{flow/flowchart.pdf}
+\centering
+\begin{overprint}
+    \onslide<1>\includegraphics[scale=0.3]{flow/old-flow.pdf}
+    \onslide<2>\includegraphics[scale=0.3]{flow/flowchart.pdf}
+\end{overprint}
 \end{figure}
+\end{center}
+\pause
+\begin{block}{Result: significant speedup}
+\begin{itemize}
+    \item Old algorithm: 200 trajectories in 2 weeks
+    \item New algorithm: 200 trajectories in 4 days
+\end{itemize}
+\end{block}
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
@@ -404,13 +457,13 @@ Descriptors : All interatomic distances of the substrate and any residue of inte
 \centering
 \begin{minipage}[b]{0.45\linewidth}
 \includegraphics[scale=0.2]{figures/separatrix-full.png}
-\caption{Committor analysis for 1$^{st}$ TS from trajectory no. 139 of the old variant}
+\caption{Equicommittor points along reactive trajectories in the TPS ensemble}
 \label{fig:minipage1}
 \end{minipage}
 \quad
 \begin{minipage}[b]{0.45\linewidth}
 \includegraphics[scale=0.08]{figures/trans-ensemble.png}
-\caption{Committor analysis for 2$^{nd}$ TS from trajectory no. 139 of the old variant}
+\caption{Ensemble of transition states calculated using TPS}
 \label{fig:minipage2}
 \end{minipage}
 \end{figure}
@@ -427,45 +480,6 @@ Descriptors : All interatomic distances of the substrate and any residue of inte
 %\includegraphics[scale=0.08]{figures/trans-ensemble.png}
 %\caption{Ensemble of transition states}
 %\end{figure}
-\end{frame}
-%------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Human adenosyl methionine enzyme}
-\begin{figure}
-\centering 
-\includegraphics[scale=0.6]{figures/mat2a-reaction.png}
-\end{figure}
-SAM is an essential metabolite which is distributed to almost all body tissues and fluids, is a
-universal methyl donor, and is of fundamental importance to
-the metabolism of compounds such as hormones, neurotransmitters, proteins, and nucleic acids.
-\end{frame}
-%------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{System preparation}
-\begin{itemize}
-\item The energies of both the systems were minimized using 50 steps of the 
-steepest descent method, followed by 2000 steps of the
-adopted basis Newton-Raphson method where only classical molecular mechanics 
-was used for the dynamics. 
-
-\item The minimized systems were
-heated slowly to 300 K for 35 ps beginning with harmonic
-constraints on all atoms except on the H atoms and the TIP3P 
-water molecules with gradual reduction of the restraint forces. 
-
-\item 15 ps of equilibration was carried out starting with harmonic 
-restraint forces followed by 20 ps of constraint free 
-equilibration to prepare the systems for TPS simulations. 
-
-\end{itemize}
-\end{frame}
-%------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{System preparation}
-\begin{figure}
-\centering 
-\includegraphics[scale=0.2]{figures/mat2a-equil.png}
-\end{figure}
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
@@ -498,25 +512,12 @@ Stddev & 0.04 & 0.03 \\
 Experimental results: $d_{\text{SC}}:\;2.03$ {\AA} and $d_{\text{OC}}:\;2.32$ {\AA}
 \end{frame}
 %------------------------------------------------------------------------------
-%\begin{frame}
-%\frametitle{Committor distribution analysis}
-%\begin{figure}[ht!]
-%\centering
-%\begin{minipage}[b]{0.45\linewidth}
-%\includegraphics[width=\textwidth]{figures/comm-60-mat2a-nocons.pdf}
-%\label{fig:minipage1}
-%\end{minipage}
-%\quad
-%\begin{minipage}[b]{0.45\linewidth}
-%\includegraphics[width=\textwidth]{figures/comm-60-mat2a.pdf}
-%\label{fig:minipage2}
-%\end{minipage}
-%\caption{Committor distribution analysis for obtaining the reaction coordinate of the 
-%MAT2A catalyzed reaction. The figure on the left has the QM region constrained and the figure 
-%on the right has the QM region along with the Gln113, Ser114, Arg249 and Arg264 residues constrained.}
-%\label{fig:mat2a-comm-dist}
-%\end{figure}
-%\end{frame}
+\begin{frame}
+ \begin{figure}
+\centering
+\includegraphics[scale=0.6]{figures/sree_outline_2.png}
+  \end{figure}
+\end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
 \frametitle{TPS ensemble}
@@ -548,6 +549,9 @@ regions $\mathcal{A}$ and $\mathcal{B}$
 %------------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Equilibrium sampling in trajectory space: The algorithm}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\resizebox{0.95\textwidth}{0.95\textwidth}{
 \begin{tikzpicture}
 %\draw [thick] (0.0 ,0.1) to [ curve through ={(0.5, 0.6) . . (0.55, 0.65)  . . (1.0,1.1) . . (3.3, 2.25) . . (4.2, 4.7) . . (4.5,5.2) . . (6.77, 5.56)  }] (6.8,5.66);%
 \pause
@@ -600,7 +604,18 @@ every axis y label/.style={
     \draw [red,thick] (3.58 ,2.54) to [ curve through ={(3.6,2.6)  . . (3.65, 2.75) . . (3.89,2.99) . . (4.0,3.15)  }] (4.0,3.11);% curve
     \pause
     \draw [red,thick] (3.58 ,2.54) to [ curve through ={(3.48,2.62)  . . (3.38, 2.69) . . (3.26,2.77) . . (3.1,2.89)  }] (2.9,3.0);% curve
-\end{tikzpicture}
+\end{tikzpicture}}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\item Divide the order parameter range into overlapping windows
+\item Use a trajectory from the TPS ensemble as a guide
+\item To sample within a window, pick a random slice from the guide trajectory from within the window
+\item Use shooting algorithm with a modified Monte-Carlo acceptance criterion, accept if a frame falls within the window
+\item Build a probability distribution function of the order parameter for each window
+\end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
@@ -616,7 +631,7 @@ In practice, the calculation of $P(\lambda_i)$ proceeds through histogram based 
 \pause
 \begin{block}{}
 The algorithm is implemented using python and is available for use through a
-\href{https://github.com/sreeganb/free-energy-tps}{Github repository}
+\href{https://github.com/sreeganb/free-energy-tps}{GitHub repository}
 \end{block}
 \end{frame}
 %------------------------------------------------------------------------------
@@ -635,7 +650,57 @@ The algorithm is implemented using python and is available for use through a
 %\end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
-\frametitle{Free energies}
+\frametitle{\textit{Plasmodium vivax} adenosine deaminase}
+As a proof of concept of our method we applied it to calculate the free energy of the reaction catalyzed by
+the \emph{plasmodium vivax} adenosine deaminase
+\begin{figure}
+\includegraphics[scale=0.6]{figures/ada-reaction.png}
+\end{figure}
+\begin{itemize}
+\item Multi-atom transfer reaction
+\item \textit{Plasmodium vivax} is a parasite that is responsible for the largest number of cases of
+malaria globally and is a potential drug target
+\end{itemize}
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Equilibrium structure}
+\begin{itemize}
+\item Starting from the crystal structure the enzyme is solvated, minimized, heated to $300\;$ K and
+equilibrated for $100\;$ps
+\end{itemize}
+\begin{figure}
+\includegraphics[scale=0.12]{figures/ada-equil.png}
+\caption{Equilibrated structure of the \emph{pv} adenosine deaminase enzyme bound with the substrates}
+\end{figure}
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Free energies and comparison to experiments}
+%\begin{minipage}{0.5\textwidth}
+%\begin{figure}
+%\includegraphics[scale=0.5]{figures/ada-exp.png}
+%\end{figure}
+%\end{minipage}
+%\begin{minipage}{0.5\textwidth}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=0.5]{figures/ada-fenergy.pdf}
+%\end{figure}
+%\end{minipage}
+\begin{figure}
+   \includegraphics[width=0.475\textwidth]{figures/ada-exp.png}
+   \hfill
+   \includegraphics[width=0.475\textwidth]{figures/ada-fenergy.pdf}
+   %\includegraphics[width=0.475\textwidth]{figures/ada-error-fenergy.png}
+\caption{Calculated free energy barrier: $21\;kcal\;mol^{-1}$ (right), compared to experimental predictions}
+\end{figure}
+Qualitatively predicts the free energy profile as calculated from 
+experiments\footfullcite{Luo07JAmChemSoc129p8008} for \textit{plasmodium falciparum} adenosine deaminase.
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Free energy profile for the MAT2A enzyme catalyzed reaction}
 \begin{itemize}
 \item 20 overlapping windows, 2500 trajectories of $20\;fs$ length in each window
 \end{itemize}
@@ -658,125 +723,273 @@ Calculated & 16\footfullcite{Balasubramani22JPhysChemB126p5413} \\
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
-\frametitle{\textit{Plasmodium vivax} adenosine deaminase}
-\begin{figure}
-\includegraphics[scale=0.6]{figures/ada-reaction.png}
-\end{figure}
-\textit{Plasmodium vivax} is a parasite that is responsible for the largest number of cases of
-malaria globally
+ \begin{figure}
+\centering
+\includegraphics[scale=0.6]{figures/sree_outline_3.png}
+  \end{figure}
+  \begin{itemize}[<+-|alert@+>]
+        \item In collaboration with Prof. Anthony Green's research group at the University of Manchester
+        \item Understand the optimization of an artifical enzyme 
+        %\item Provides new insights into the emergence of sophisticated catalytic sites in proteins
+        %\item Use noncanonical amino acids and improve catalytic efficiency
+    \end{itemize}
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
-\frametitle{Equilibrium structure}
-\begin{figure}
-\includegraphics[scale=0.23]{figures/ada-equil.png}
-\end{figure}
-\end{frame}
-%------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Free energies and comparison to experiments}
-%\begin{minipage}{0.5\textwidth}
-%\begin{figure}
-%\includegraphics[scale=0.5]{figures/ada-exp.png}
-%\end{figure}
-%\end{minipage}
-%\begin{minipage}{0.5\textwidth}
-%\begin{figure}
-%\centering
-%\includegraphics[scale=0.5]{figures/ada-fenergy.pdf}
-%\end{figure}
-%\end{minipage}
-\begin{figure}
-   \includegraphics[width=0.475\textwidth]{figures/ada-exp.png}
-   \hfill
-   \includegraphics[width=0.475\textwidth]{figures/ada-fenergy.pdf}
-   %\includegraphics[width=0.475\textwidth]{figures/ada-error-fenergy.png}
-\caption{Calculated free energy barrier: $21\;kcal\;mol^{-1}$}
-\end{figure}
-Qualitatively predicts the free energy profile as calculated from experiments for \textit{plasmodium falciparum}
-adenosine deaminase.
-\end{frame}
-%------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{}
-\begin{block}{\centering Computational design of artificial enzymes}
-\pause
+\frametitle{Motivations}
 \begin{itemize}[<+-|alert@+>]
-        \item Provides new insights into the emergence of sophisticated catalytic sites in proteins
-        \item Use noncanonical amino acids and improve catalytic efficiency
-    \end{itemize} 
-\end{block}
-\end{frame}
-%------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Directed Evolution}
-Design enzymes that catalyze the Morita-Bayliss-Hillman reaction
+\item{MBH reaction is an important organic synthesis tool for the formation of C-C bonds, 
+useful in natural product synthesis \footfullcite{Basavaiah10ChemRev110p5447}}
+\item{Currently chemical catalysts are used in synthesis which have low efficiencies 
+and therefore require high catalyst loading}
+\item{No known natural enzyme catalyzes this reaction}
+\item The starting point for evolutionary optimization was a primitive computationally 
+designed protein \footfullcite{Bjelic13ACSChemBio8p749}
+\end{itemize}
 \begin{figure}
 \centering
 \includegraphics[scale=0.4]{figures/mbh-reaction.png}
 \end{figure}
-MBH reaction is an important organic synthesis tool for the formation of C-C bonds
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Statement of the problem}
+\begin{figure}
+\centering
+\includegraphics[scale=0.4]{figures/mbh-reaction.png}
+\end{figure}
 \begin{itemize}[<+-|alert@+>]
-\item{Transfer of two protons}
-\item{Does evolution select for quantum mechanical tunneling?}
+\item{The rate of H-transfer reactions can be enhanced by both classical and 
+quantum mechanical tunneling (QMT) mechanisms}
+\item{Where H-transfer is (partly) rate-limiting during enzyme reactions 
+%that infer an evolutionary fitness advantage (e.g. in
+%central metabolism or detoxification), 
+selection of mutants that have enhanced classical and/or QMT H-transfers should
+occur.} 
+\item {Does evolution then favour classical or QMT reactions?}
+\end{itemize}
+\pause
+\begin{block}{Goal}
+Use TPS to find evidence for QMT along the evolutionary trajectory
+\end{block}
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Differences in the active sites of evolved enzymes}
+The most catalytically efficient enzyme in the first cycle of 
+directed evolution \footfullcite{Crawshaw22NatChem14p313} is shown on the left and 
+the resulting enzyme from a second cycle of directed evolution incorporating 
+a noncanonical methylhistidine amino acid is shown on the right.
+\begin{figure}[ht!]
+\centering
+\begin{minipage}[b]{0.45\linewidth}
+\includegraphics[scale=0.08]{figures/trans-120.png}
+%\caption{Active site of the native enzyme}
+\end{minipage}
+\quad
+\begin{minipage}[b]{0.45\linewidth}
+\includegraphics[scale=0.08]{figures/prot-alkoxide-trans.png}
+%\caption{Active site of the evolved enzyme}
+\end{minipage}
+\end{figure}
+\begin{itemize}
+\item The new variant shows a 20-fold increase in rate compared to the old variant
 \end{itemize}
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
-\frametitle{BH32 Variant}
-This is the most evolved version of the previous generation \footfullcite{Crawshaw22NatChem14p313}
+\frametitle{Differences in transition states}
 \begin{figure}
-\centering
-\includegraphics[scale=0.1]{figures/trans-120.png}
+\includegraphics[scale=0.4]{figures/mbh-committors/old/dist150.pdf}
+\quad
+\includegraphics[scale=0.4]{figures/mbh-committors/new/dist209.pdf}
+\caption{Time series of order parameters for the old (left) and new (right) variants}
 \end{figure}
+%
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/mbh-committors/old/new-figures/150-first-comm.pdf}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/mbh-committors/old/new-figures/150-second-comm.pdf}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/mbh-committors/new/209-comm.pdf}
+     \end{subfigure}
+        \caption{1$^{st}$ and 2$^{nd}$ graphs correspond to the committor functions of the two transition states of the 
+        old variant and the 3$^{rd}$ corresponds to the committor function of the transition state of the new variant}
+\end{figure}
+%\begin{figure}
+%   \includegraphics[width=0.28\textwidth]{figures/mbh-committors/old/new-figures/150-first-comm.pdf}
+%   \quad
+%   \includegraphics[width=0.28\textwidth]{figures/mbh-committors/old/new-figures/150-second-comm.pdf}
+   %\quad
+   %\includegraphics[width=0.40]{figures/mbh-committors/new/209-comm.pdf}
+   %\caption{Committor function corresponding to the 2$^{nd}$ transition state}
+   %\includegraphics[width=0.475\textwidth]{figures/ada-error-fenergy.png}
+   %\caption{Committor function corresponding to the 1$^{st}$ transition state}
+%\end{figure}
+%Committor function corresponding to the 1$^{st}$ transition state
+%
+%
+%\begin{figure}
+
+%\caption{Time series of relevant atomic distances for the new variant}
+%\end{figure}
+%
+%\begin{figure}
+%\includegraphics[scale=0.375]{figures/mbh-committors/new/209-comm.pdf}
+%\caption{Committor function corresponding to the transition state}
+%\end{figure}
+
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
-\frametitle{Free enegy profile}
+\frametitle{Free energy profile}
 \begin{figure}
 \centering
 \begin{minipage}[b]{0.45\linewidth}
 \includegraphics[scale=0.6]{figures/glu-fenergy.pdf}
-\caption{Reactant}
+\caption{Free energy profile for the old variant of the MBHase enzyme}
 \label{fig:minipagef1}
 \end{minipage}
 \quad
 \begin{minipage}[b]{0.45\linewidth}
 \includegraphics[scale=0.6]{figures/prot-alkox-fenergy.pdf}
-\caption{Product}
-\label{fig:minipagef2}
+\caption{Free energy profile of the new variant of the MBHase enzyme}
 \end{minipage}
 \end{figure}
+\begin{block}{}
+\begin{itemize}
+\item Width and height of the free energy barrier are larger for the old variant compared
+to the new variant
+\item Preliminary result proving that possibility of tunneling 
+\item Quantum treatmet of the proton is necessary to conclusively calculate 
+the rate of tunneling
+\end{itemize}
+\end{block}
 \end{frame}
-
 %------------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Conclusions}
-\begin{block}
-{
-    \begin{itemize}[<+-|alert@+>]
-        \item  TPS based free energies are implemented 
-        \item  Free energy calculations can be performed without the inclusion of 
-        biasing potentials and the knowledge of reaction coordinates
-        \item Free energy implementation was tested for the first time on enzyme catalyzed
-        reactions, human MAT2A enzyme and plasmodium falciparum adenosine deaminase 
-        \item The free energies calculated were qualitatively in good agreement with experimental
-        measurements 
+\begin{center}
+\begin{figure}
+\centering
+\begin{overprint}
+    \onslide<1>
+    \begin{center}
+    \includegraphics[scale=0.09]{figures/mat2a-trans-labelled.png}
+    \end{center}
+    \begin{itemize}
+        \item Successfully accelerated TPS simulations using neural networks
+        \item Calculated transition states and free energy profile
+        for the reaction catalyzed by the human MAT2A enzyme
     \end{itemize}
-}
-\end{block}
+    \onslide<2>
+    \begin{center}
+    \includegraphics[scale=0.5]{figures/ada_merge.png}
+    \end{center}
+    \begin{itemize}
+        \item Implemented an algorithm to calculate free energies within the TPS method
+        \item Calculated free energy profile for the adenosine deaminase enzyme and showed its
+        qualitative agreement with experimental results
+    \end{itemize}
+    \onslide<3>
+    \begin{center}
+    \includegraphics[scale=0.5]{figures/mbhase_merge.png}
+    \end{center}
+    \begin{itemize}
+        \item Calculated mechanism for MBH reaction catalyzed by artificially evolved enzymes
+        \item Proof of quantum mechanical tunneling in evolved enzymes
+    \end{itemize}
+\end{overprint}
+\end{figure}
+\end{center}
+%\begin{block}
+%{
+%    \begin{itemize}[<+-|alert@+>]
+%        \item  TPS based free energies are implemented 
+%        \item  Free energy calculations can be performed without the inclusion of 
+%        biasing potentials and the knowledge of reaction coordinates
+%        \item Free energy implementation was tested for the first time on enzyme catalyzed
+%        reactions, human MAT2A enzyme and plasmodium falciparum adenosine deaminase 
+%        \item The free energies calculated were qualitatively in good agreement with experimental
+%        measurements 
+%    \end{itemize}
+%}
+%\end{block}
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
 \frametitle{PhD work}
 \begin{itemize}
-\item Density functional theory development 
-\item 
-\end{itemize}  
+\item Developed random phase approximation method which is a quantum chemical theory
+for calculating the electronic structure and spectroscopic properties of molecules \footfullcite{Balasubramani22JChemPhys157p164107}
+\item Implemented the theory in TURBOMOLE program package written in FORTRAN \footfullcite{Balasubramani20JChemPhys152p184107}
+\end{itemize}
+\begin{figure}
+\centering
+\includegraphics[scale=0.15]{figures/tmole.png}
+\end{figure}
 \end{frame}
 %------------------------------------------------------------------------------
 \begin{frame}
-\frametitle{Acknowledgements}
+\frametitle{PhD work}
+\begin{block}{}
+\begin{figure}
+\includegraphics[scale=0.27]{figures/f12_errors.pdf}
+\vspace*{-0.4cm}
+\caption{Static polarizability calculations of small molecules}
+\end{figure}
+\end{block}
+\begin{block}{}
+\begin{center}
+\includegraphics[scale=0.07]{figures/label_1.png}
+\end{center}
+\pause
+\vspace*{-0.5cm}
+\begin{columns}
+\column{0.25\textwidth}
+\begin{center}
+\includegraphics[scale=0.06]{figures/6water_acetic.jpg}
+\end{center}
+
+\pause
+\column{0.25\textwidth}
+\begin{center}
+\includegraphics[scale=0.06]{figures/6water_acetate.jpg}
+\end{center}
+
+\pause
+\column{0.25\textwidth}
+
+\begin{center}
+\includegraphics[scale=0.06]{figures/6water_trifluoro.jpg}
+\end{center}
+\pause
+\column{0.25\textwidth}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.07]{figures/6methanol_acetic.jpg}
+\end{figure}
+\end{columns}
+\end{block}
+
+\begin{itemize}
+\item Calculations of core ionization potentials of solvated organic molecules
+\end{itemize}
+
+\end{frame}
+%------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Acknowledgments}
 \begin{block}{Schwartz group}
 \begin{itemize}
     \item Prof. Steven D. Schwartz
@@ -799,3 +1012,4 @@ This is the most evolved version of the previous generation \footfullcite{Crawsh
 %\input{BeamerConcl.tex}
 
 \end{document}
+
